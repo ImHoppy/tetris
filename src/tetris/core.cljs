@@ -357,7 +357,7 @@
 (defn panel [& children]
   (into [css
          {:border "2px solid rgba(255,255,255, 0.1)"
-          :padding 10
+          :padding 2
           :box-sizing :border-box}] children))
 
 (defn info [label & children]
@@ -367,7 +367,7 @@
           :color :white
           :box-sizing :border-box
           :text-align :center
-          :width 120
+          :width 80
           :padding 10}
          [css {:font-weight :bold
                :margin-bottom 5
@@ -529,6 +529,11 @@
         :justify-content :space-between
         :flex-direction :column}
        [hold-info world #(on-update {:type :player-hold})]
+       [css
+        {:display :flex
+         :justify-content :space-between
+         :flex-direction :column}
+        [next-info world]]
        [score-info world]]
       [gutter]
       [:div
@@ -544,12 +549,7 @@
          :projection (projection world)
          :positions (merge positions (get-positions player))
          :on-update on-update}]]
-      [gutter]
-      [css
-       {:display :flex
-        :justify-content :space-between
-        :flex-direction :column}
-       [next-info world]]]]))
+      [gutter]]]))
 
 (defn start-screen [on-update]
   [overlay
